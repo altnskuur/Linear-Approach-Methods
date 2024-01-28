@@ -1,5 +1,5 @@
 # Linear-Approach-Methods
 
-This project include 3 linear aprroach methods. These methods are Cholesky, Gauss Seidel and CGM (Conjugate Gradiant Method). 
+This project includes linear aprroach methods. These methods are Cholesky, Gauss Seidel and CGM (Conjugate Gradiant Method). 
 
 These algorithms are written in MATLAB. All of algorithms in a function. The function takes 3 inputs for Ax=b system. First one A matrix, second one b vector, and the last one is Method. Methods are selecting with a number. Number 1 is Cholesky, number 2 is Gauss Seidel, and number 3 is CGM. If input method parameter is not in this range, algorithm will return 0 vector. 
