@@ -11,7 +11,46 @@ function x_vector = methods_function(A_matrix, b_vector, method_number)
     end
     switch method_number
         case 1 %Cholesky Method
+								L = zeros(lengthB, lengthB);
+								sumofL = 0;
+								for j = 1 : lengthB
+    								 for i = j : lengthB
+        					     if(i==j)
+            					      for k = 1 : (j-1);
+                						    sumofL = L(j,k)*L(j,k) + sumofL;
+            						     end
+            						 L(i,j) = sqrt(A_matrix(i,j) - sumofL);
+        								 else
+            									for k = 1 : (j-1)
+                						    sumofL = L(i,k)*L(j,k);
+                         end
+                         L(i,j) = (A_matrix(i,j) - sumofL) / L(j,j);
+                     end
+                     sumofL = 0;
+              		end
+             	end
+							 		
+									L_T = L.'; %transpose of  matrix
+									%L*y=b and L_T*x=y
+									y_vector = zeros(lengthB, 1);
+									sumofY = 0;
+									for i = 1 : lengthB
+    									for j = 1 : (i-1)
+        								sumofY = L(i,j) * y_vector(j, 1) + sumofY;
+    									end
+    									y_vector(i) = (b_vector(i) - sumofY) / L(i, i);
+    									sumofY = 0;
+									end
 
+									sumofX = 0;
+									for j = 1: lengthB
+    									j_T = lengthB - j + 1;
+    									for i = (j_T+1) : lengthB
+        								sumofX = L(i, j_T)*x_vector(i);
+    									end
+    									x_vector(j_T) = (b_vector(j_T) - sumofX) / L(j_T,j_T);
+											sumofX = 0;
+									end
         case 2 %Gauss Seidel Method
             sumofX = zeros(lengthB, 1);
             for iteration = 1 : 10 %CHANGE: iteration can be dynamic. if change percentage of result is under of a number, iteration can be stop.
